@@ -282,8 +282,8 @@ namespace MailChimp.Net.Logic
         /// <param name="listId">
         /// The list id.
         /// </param>
-        /// <param name="emailAddress">
-        /// The email address.
+        /// <param name="emailAddressMD5">
+        /// The email address MD5.
         /// </param>
         /// <param name="request"></param>
         /// <returns>
@@ -316,11 +316,11 @@ namespace MailChimp.Net.Logic
         /// <exception cref="InvalidOperationException">This member belongs to a type that is loaded into the reflection-only context. See How to: Load Assemblies into the Reflection-Only Context.</exception>
         /// <exception cref="TypeLoadException">A custom attribute type cannot be loaded. </exception>
         /// <exception cref="NotSupportedException"><paramref name="element" /> is not a constructor, method, property, event, type, or field. </exception>
-        public async Task<Member> GetAsync(string listId, string emailAddress, BaseRequest request = null)
+        public async Task<Member> GetAsync(string listId, string emailAddressMD5, BaseRequest request = null)
         {
             using (var client = this.CreateMailClient($"{BaseUrl}/"))
             {
-                var response = await client.GetAsync($"{listId}/members/{this.Hash(emailAddress.ToLower())}{request?.ToQueryString()}").ConfigureAwait(false);
+                var response = await client.GetAsync($"{listId}/members/{emailAddressMD5}{request?.ToQueryString()}").ConfigureAwait(false);
                 await response.EnsureSuccessMailChimpAsync().ConfigureAwait(false);
                 return await response.Content.ReadAsAsync<Member>().ConfigureAwait(false);
             }

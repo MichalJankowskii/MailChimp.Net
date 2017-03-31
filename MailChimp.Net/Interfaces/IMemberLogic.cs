@@ -91,14 +91,14 @@ namespace MailChimp.Net.Interfaces
 		/// <param name="listId">
 		/// The list id.
 		/// </param>
-		/// <param name="emailAddress">
+		/// <param name="emailAddressMD5">
 		/// The email address.
 		/// </param>
 		/// <param name="request"></param>
 		/// <returns>
 		/// The <see cref="Task"/>.
 		/// </returns>
-		Task<Member> GetAsync(string listId, string emailAddress, BaseRequest request = null);
+		Task<Member> GetAsync(string listId, string emailAddressMD5, BaseRequest request = null);
 
 		/// <summary>
 		/// The check if exists async.
